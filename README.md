@@ -1,4 +1,4 @@
 # 3tier-architecture
 
 # Infra Diagram
-![Tier3Topology](Tier3Topology.png)
+![3TierTopology](3tier_arch.png)
