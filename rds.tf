@@ -7,7 +7,7 @@ resource "aws_db_instance" "rds_mysql" {
   instance_class          = "db.t3.micro"
   db_name                 = "movies_db"
   username                = "admin_db"
-  password                = jsondecode(data.aws_secretsmanager_secret_version.mysql_passwd_version.secret_string)["mysql_db_passwd"]
+  password                = jsondecode(data.aws_secretsmanager_secret_version.mysql_passwd_version.secret_string)["rds_mysql_passwd"]
   db_subnet_group_name    = aws_db_subnet_group.rds_db_subnets.name
   multi_az                = true
   backup_retention_period = 1

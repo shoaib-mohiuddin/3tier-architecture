@@ -8,3 +8,11 @@ data "aws_ami" "ubuntu" { # for bastion host
 
   owners = ["099720109477"]
 }
+
+data "aws_secretsmanager_secret" "mysql_passwd" {
+  name = "rds_mysql_passwd"
+}
+
+data "aws_secretsmanager_secret_version" "mysql_passwd_version" {
+  secret_id = data.aws_secretsmanager_secret.mysql_passwd.id
+}
