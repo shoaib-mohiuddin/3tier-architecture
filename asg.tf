@@ -5,8 +5,8 @@ resource "aws_launch_configuration" "web_asg_conf" {
   instance_type        = "t3.small"
   key_name             = "ta-mumbai"
   iam_instance_profile = aws_iam_instance_profile.ssm_profile.name
-  #security_groups = []
-  user_data = <<EOF
+  security_groups      = [aws_security_group.web_sg.id]
+  user_data            = <<EOF
   #!/bin/bash
   sudo su apt-get update
   sudo su apt-get install stress
@@ -94,8 +94,8 @@ resource "aws_launch_configuration" "app_asg_conf" {
   instance_type        = "t3.small"
   key_name             = "ta-mumbai"
   iam_instance_profile = aws_iam_instance_profile.ssm_profile.name
-  #security_groups = []
-  user_data = <<EOF
+  security_groups      = [aws_security_group.app_sg.id]
+  user_data            = <<EOF
   #!/bin/bash
   sudo su apt-get update
   sudo su apt-get install stress

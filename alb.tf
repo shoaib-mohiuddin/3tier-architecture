@@ -1,6 +1,6 @@
 resource "aws_lb" "application_lb" {
-  name = "application-lb"
-  #security_groups    = []
+  name               = "application-lb"
+  security_groups    = [aws_security_group.alb_sg.id]
   load_balancer_type = "application"
 
   subnets = [

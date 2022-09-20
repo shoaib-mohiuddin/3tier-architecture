@@ -12,7 +12,7 @@ resource "aws_db_instance" "rds_mysql" {
   multi_az                = true
   backup_retention_period = 1
   skip_final_snapshot     = true
-  #vpc_security_group_ids = []
+  vpc_security_group_ids  = [aws_security_group.database_sg.id]
 }
 
 resource "aws_db_subnet_group" "rds_db_subnets" {
