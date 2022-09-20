@@ -5,20 +5,13 @@ variable "vpc_name" {
 
 variable "aws_region" {
   description = "The region to deploy the resources"
-  type = string
+  type        = string
 }
-variable "az_a" {
-  description = "The AZ to deploy the resources"
-  type = string
+
+variable "availability_zones" {
+  description = "The AZs to deploy the resources"
 }
-variable "az_b" {
-  description = "The AZ to deploy the resources"
-  type = string
-}
-variable "az_c" {
-  description = "The AZ to deploy the resources"
-  type = string
-}
+
 
 variable "cidr_vpc" {
   description = "This is the CIDR of the VPC"
