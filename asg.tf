@@ -17,7 +17,7 @@ resource "aws_launch_configuration" "web_asg_conf" {
 
 resource "aws_autoscaling_group" "web_asg" {
   name                 = "web-sg"
-  desired_capacity     = 1
+  desired_capacity     = 2
   max_size             = 2
   min_size             = 0
   launch_configuration = aws_launch_configuration.web_asg_conf.name
@@ -69,7 +69,7 @@ resource "aws_autoscaling_policy" "web_asg_policy_scaledown" {
 
 resource "aws_cloudwatch_metric_alarm" "web_alarm_scaledown" {
   alarm_name          = "web-alarm"
-  comparison_operator = "GreaterThanOrEqualToThreshold"
+  comparison_operator = "LessThanOrEqualToThreshold"
   evaluation_periods  = 2
   metric_name         = "CPUUtilization"
   namespace           = "AWS/EC2"
@@ -86,7 +86,7 @@ resource "aws_cloudwatch_metric_alarm" "web_alarm_scaledown" {
   alarm_actions     = [aws_autoscaling_policy.web_asg_policy_scaledown.arn]
 }
 
-#---------------------------- AUTOSCALING GROUP FOR APPSERVERS ---------------------------#
+#------------------------------------ AUTOSCALING GROUP FOR APPSERVERS ----------------------------------#
 
 resource "aws_launch_configuration" "app_asg_conf" {
   name                 = "app_launch_config"
@@ -106,7 +106,7 @@ resource "aws_launch_configuration" "app_asg_conf" {
 
 resource "aws_autoscaling_group" "app_asg" {
   name                 = "app-sg"
-  desired_capacity     = 1
+  desired_capacity     = 2
   max_size             = 2
   min_size             = 0
   launch_configuration = aws_launch_configuration.app_asg_conf.name
@@ -158,7 +158,7 @@ resource "aws_autoscaling_policy" "app_asg_policy_scaledown" {
 
 resource "aws_cloudwatch_metric_alarm" "app_alarm_scaledown" {
   alarm_name          = "app-alarm-scaledown"
-  comparison_operator = "GreaterThanOrEqualToThreshold"
+  comparison_operator = "LessThanOrEqualToThreshold"
   evaluation_periods  = 2
   metric_name         = "CPUUtilization"
   namespace           = "AWS/EC2"

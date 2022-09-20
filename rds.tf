@@ -20,7 +20,7 @@ resource "aws_db_subnet_group" "rds_db_subnets" {
   subnet_ids = [
     aws_subnet.data_private["a"].id,
     aws_subnet.data_private["b"].id,
-    #aws_subnet.data_private["c"].id
+    aws_subnet.data_private["c"].id
   ]
 
   tags = {
