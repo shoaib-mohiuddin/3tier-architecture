@@ -18,8 +18,8 @@ resource "aws_launch_configuration" "web_asg_conf" {
 resource "aws_autoscaling_group" "web_asg" {
   name                 = "web-sg"
   desired_capacity     = 2
-  max_size             = 2
-  min_size             = 0
+  max_size             = 4
+  min_size             = 2
   launch_configuration = aws_launch_configuration.web_asg_conf.name
   vpc_zone_identifier  = [aws_subnet.web_public["a"].id, aws_subnet.web_public["b"].id]
 
@@ -68,7 +68,7 @@ resource "aws_autoscaling_policy" "web_asg_policy_scaledown" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "web_alarm_scaledown" {
-  alarm_name          = "web-alarm"
+  alarm_name          = "web-alarm-scaledown"
   comparison_operator = "LessThanOrEqualToThreshold"
   evaluation_periods  = 2
   metric_name         = "CPUUtilization"
@@ -107,8 +107,8 @@ resource "aws_launch_configuration" "app_asg_conf" {
 resource "aws_autoscaling_group" "app_asg" {
   name                 = "app-sg"
   desired_capacity     = 2
-  max_size             = 2
-  min_size             = 0
+  max_size             = 4
+  min_size             = 2
   launch_configuration = aws_launch_configuration.app_asg_conf.name
   vpc_zone_identifier  = [aws_subnet.app_private["a"].id, aws_subnet.app_private["b"].id]
 
@@ -149,7 +149,7 @@ resource "aws_cloudwatch_metric_alarm" "app_alarm" {
 
 resource "aws_autoscaling_policy" "app_asg_policy_scaledown" {
   name                   = "app-policy-scaledown"
-  scaling_adjustment     = 1
+  scaling_adjustment     = -1
   adjustment_type        = "ChangeInCapacity"
   cooldown               = 300
   policy_type            = "SimpleScaling"

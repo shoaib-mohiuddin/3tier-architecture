@@ -30,10 +30,10 @@ resource "aws_security_group" "web_sg" {
   vpc_id      = aws_vpc.vpc_3tier.id
 
   ingress {
-    description = "Allow port 80"
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
+    description     = "Allow port 80"
+    from_port       = 80
+    to_port         = 80
+    protocol        = "tcp"
     security_groups = [aws_security_group.alb_sg.id]
   }
   ingress {
@@ -63,10 +63,10 @@ resource "aws_security_group" "app_sg" {
   vpc_id      = aws_vpc.vpc_3tier.id
 
   ingress {
-    description = "Allow port 80"
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
+    description     = "Allow port 80"
+    from_port       = 80
+    to_port         = 80
+    protocol        = "tcp"
     security_groups = [aws_security_group.web_sg.id]
   }
   ingress {
